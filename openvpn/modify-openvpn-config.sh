@@ -38,6 +38,8 @@ if [[ $CONFIG_MOD_CA_CERTS == "1" ]]; then
     # ca /etc/openvpn/mullvad/ca.crt
     # ca ca.ipvanish.com.crt
     sed -i -E "s#ca\s+(.*/)*#ca $config_directory/#g" "$CONFIG"
+    sed -i -E "s#cert\s+(.*/)*#cert $config_directory/#g" "$CONFIG"
+    sed -i -E "s#key\s+(.*/)*#key $config_directory/#g" "$CONFIG"
 fi
 
 ## Option 3 - Update ping options to exit the container, so Docker will restart it
@@ -117,7 +119,7 @@ if [[ $CONFIG_MOD_FAILURE_SCRIPT == "1" ]]; then
   elif [[ "${CONFIG_STATUS}" != "failure" ]]; then
     CONFIG_STATUS="unknown"
   fi
-
+  echo "$(cat /etc/openvpn/cyberghost/default.ovpn)"
   # Remove any old options
   sed -i "/^; status.*$/d" "${CONFIG}"
   
