@@ -1,3 +1,19 @@
+complete procedure to follow from scratch:
+
+sudo apt update
+sudo apt upgrade
+sudo rpi-update
+sudo reboot
+mount disk permanently: https://wiki.geekworm.com/Auto_Mount_an_NTFS_USB_Drive_on_Raspberry_Pi
+installed plex via https://pimylifeup.com/raspberry-pi-plex-server/
+downloaded the openvpn configuration from cyberghost + username / password and pushed on my fork here https://github.com/alcarrano/vpn-configs-contrib/blob/main/openvpn/cyberghost/default.ovpn
+installed docker https://docs.docker.com/engine/install/raspberry-pi-os/#install-using-the-convenience-script 
+launched: sudo docker run --cap-add=NET_ADMIN -d -v /mnt/usbhdd/torrent/:/data -v /mnt/usbhdd/torrent/transmission-home/:/config -e OPENVPN_PROVIDER=cyberghost -e OPENVPN_USERNAME=yLffR5pM2B -e OPENVPN_PASSWORD=PTVvX7XaQG -e LOCAL_NETWORK=192.168.0.0/16 -e VPN_CONFIG_SOURCE=external -e GITHUB_CONFIG_SOURCE_REPO=alcarrano/vpn-configs-contrib --log-driver json-file --log-opt max-size=10m -p 9091:9091 --name=transmission --restart unless-stopped acarrano86/transmission:1.4
+it's based on https://haugene.github.io/docker-transmission-openvpn/ but it didn't work for raspberry pi+cyberghost so I forked the code (https://github.com/alcarrano/docker-transmission-openvpn/tree/master) 
+
+
+-----
+
 # OpenVPN and Transmission with WebUI
 
 [![Docker Build](https://img.shields.io/github/actions/workflow/status/haugene/docker-transmission-openvpn/docker-image-builds.yml
